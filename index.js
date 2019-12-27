@@ -22,6 +22,16 @@ inquirer.prompt([
         console.log(answers);
 
 
+        axios('https://api.github.com/users/${answers.username}')
+        .then(function(data){
+            console.log(data)
+
+        })
+
+        
+        }
+generateHtml()
+
 
 
 

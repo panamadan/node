@@ -3,6 +3,11 @@ const generateHtml = require('./generateHTML');
 var fs = require('fs');
 const convertFactory = require('electron-html-to');
 
+var data = {
+    color: "blue",
+    stars: 3,
+    userInfo: "test",
+}
 var finishedHtml = generateHtml(data)
 console.log(finishedHtml)
 var conversion = convertFactory({

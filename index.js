@@ -4,7 +4,7 @@ const electron = require("electron");
 const generateHtml = require('./generateHTML');
 var fs = require('fs');
 const convertFactory = require('electron-html-to');
-
+const path = require("path");
 
 
 inquirer.prompt([
@@ -55,24 +55,27 @@ inquirer.prompt([
                                 console.log(err);
                         })
 
-                        var conversion = convertFactory({
-                            converterPath: convertFactory.converters.PDF
-                        });
 
-                        conversion({ html: finishedHtml }, function (err, result) {
-                            if (err) {
-                                return console.error(err);
-                            }
+                            const conversion = convertFactory({
+                                converterPath: convertFactory.converters.PDF
+                            });
 
-                            console.log(result.numberOfPages);
-                            console.log(result.logs);
-                            result.stream.pipe(fs.createWriteStream('profile.pdf'));
-                            conversion.kill();
-                        });
-                    })
-                   
+                            conversion({ html: finishedHtml }, function (err, result) {
+                                if (err) {
+                                    return console.error(err);
+                                }
 
-                
+                                console.log(result.numberOfPages);
+                                console.log(result.logs);
+                                result.stream.pipe(fs.createWriteStream(path.join(__dirname, 'profile.pdf')));
+                                conversion.kill();
+                            });
+
+                        })
+                    
+
+
+
 
 
 
